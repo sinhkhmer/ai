@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Back Camera Access</title>
+    <title>Object Recognition with TensorFlow.js</title>
     <style>
         body {
             margin: 0;
@@ -21,23 +21,7 @@
 </head>
 <body>
     <video id="camera" autoplay></video>
-    <script>
-        const videoElement = document.getElementById('camera');
-        
-        async function startBackCamera() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({
-                    video: {
-                        facingMode: 'environment' // Use the back camera
-                    }
-                });
-                videoElement.srcObject = stream;
-            } catch (error) {
-                console.error('Error accessing back camera:', error);
-            }
-        }
-
-        startBackCamera();
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="script.js"></script>
 </body>
 </html>
