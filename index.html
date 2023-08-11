@@ -3,17 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Object Recognition Web App</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Back Camera Access</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        video {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Object Recognition Web App</h1>
-    </header>
-    <main>
-        <video id="camera" autoplay></video>
-        <canvas id="outputCanvas"></canvas>
-    </main>
-    <script src="script.js"></script>
+    <video id="camera" autoplay></video>
+    <script>
+        const videoElement = document.getElementById('camera');
+        
+        async function startBackCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        facingMode: 'environment' // Use the back camera
+                    }
+                });
+                videoElement.srcObject = stream;
+            } catch (error) {
+                console.error('Error accessing back camera:', error);
+            }
+        }
+
+        startBackCamera();
+    </script>
 </body>
 </html>
