@@ -32,3 +32,19 @@ async function recognizeObjects(imageData) {
     const data = await response.json();
     return data.outputs[0].data.concepts;
 }
+
+videoElement.addEventListener('play', async () => {
+    const FPS = 5; // Adjust the frame rate as needed
+    const interval = 1000 / FPS;
+
+    setInterval(async () => {
+        ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+        const imageData = canvas.toDataURL('image/jpeg', 0.7).split(',')[1];
+        
+        const recognizedObjects = await recognizeObjects(imageData);
+
+        // Display the recognized objects on the page
+        // Modify this part to update your UI with the recognized objects
+        console.log('Recognized Objects:', recognizedObjects);
+    }, interval);
+});
